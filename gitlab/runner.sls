@@ -43,6 +43,18 @@ gitlab-create_init_file:
     - require:
       - cmd: gitlab-install_runserver3
 
+gitlab-create_init_d_file:
+  file.copy:
+    - name: "/etc/init.d/gitlab-ci-runner"
+    - source: "/opt/gitlab-runner/embedded/service/gitlab-runner/lib/support/init.d/gitlab_ci_runner"
+    - user: "root" 
+    - group: "root" 
+    - mode: 775 
+    - unless: 'test -e /etc/init/gitlab-runner.conf'
+    - force: True
+    - require:
+      - cmd: gitlab-install_runserver3
+
 gitlab-runner:
   service.running:
     - enable: True
