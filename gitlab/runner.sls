@@ -50,7 +50,7 @@ gitlab-create_init_d_file:
     - user: "root" 
     - group: "root" 
     - mode: 775 
-    - unless: 'test -e /etc/init/gitlab-runner.conf'
+    - unless: '/etc/init.d/gitlab-ci-runner'
     - force: True
     - require:
       - cmd: gitlab-install_runserver3
